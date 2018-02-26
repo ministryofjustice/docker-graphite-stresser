@@ -20,6 +20,8 @@ RUN apt-get -y install \
 
 # Git packages setup
 RUN git clone https://github.com/feangulo/graphite-stresser.git ${WORKDIR}
+RUN apt -y -o Dpkg::Options::="--force-overwrite" install openjdk-8-jdk
+RUN ./gradlew uberJar && mkdir -p ./dist && mv ./build/libs/app-0.1.jar ./dist/stresser.jar
 
 # Go packages setup
 ENV GOPATH ${WORKDIR}/go
